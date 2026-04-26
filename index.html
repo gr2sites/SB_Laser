@@ -1,12 +1,562 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SB-Laser</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="description" content="Menu responsivo com hambúrguer e imagem - design adaptável para desktop, tablet e mobile">
+  <title>Menu Responsivo | Com Imagem + Hamburguer</title>
+  <style>
+    /* RESET BÁSICO */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f4f6fa;
+      /* Espaço para o header fixo (70px) */
+      padding-top: 70px;
+    }
+
+    /* HEADER FIXO NO TOPO */
+    .top-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    /* LOGO COM IMAGEM */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+      flex-shrink: 0; /* Impede a logo de encolher */
+    }
+
+    .logo:hover {
+      opacity: 0.85;
+    }
+
+    /* IMAGEM DO MENU - 100px em todos os dispositivos */
+    .img_menu {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    /* WRAPPER DO MENU PARA DESKTOP */
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    /* MENU PRINCIPAL - Desktop sempre visível */
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-menu li a {
+      color: #D4AF37;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 0;
+      transition: color 0.2s, border-bottom-color 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-menu li a:hover {
+      color: #B8960F;
+      border-bottom-color: #D4AF37;
+    }
+
+    /* Link ativo */
+    .nav-menu li a.active {
+      color: #B8860B;
+      border-bottom-color: #D4AF37;
+      font-weight: 700;
+    }
+
+    /* BOTÃO HAMBURGUER (escondido em telas grandes) */
+    .hamburger-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      width: 32px;
+      height: 26px;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1001;
+      padding: 0;
+      transition: opacity 0.2s;
+      margin-left: auto; /* Força o botão para a direita */
+    }
+
+    .hamburger-btn:hover {
+      opacity: 0.85;
+    }
+
+    .hamburger-btn:focus-visible {
+      outline: 2px solid #D4AF37;
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
+    .hamburger-btn span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: #D4AF37;
+      border-radius: 6px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Animação para o X quando menu aberto */
+    .hamburger-btn.active span:nth-child(1) {
+      transform: translateY(11px) rotate(45deg);
+    }
+    .hamburger-btn.active span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0.7);
+    }
+    .hamburger-btn.active span:nth-child(3) {
+      transform: translateY(-11px) rotate(-45deg);
+    }
+
+    /* ========== RESPONSIVO: TABLETS E CELULARES ========== */
+    @media (max-width: 768px) {
+      /* Esconde o menu wrapper em mobile */
+      .nav-wrapper {
+        position: static;
+      }
+
+      /* Mostra o botão hamburguer */
+      .hamburger-btn {
+        display: flex;
+      }
+
+      /* Estilos do menu mobile */
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%; /* Começa fora da tela à esquerda */
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: white;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        overflow-y: auto;
+        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        border-top: 1px solid #eee;
+        z-index: 999;
+      }
+
+      /* Menu aberto - vem da esquerda */
+      .nav-menu.active {
+        left: 0;
+      }
+
+      .nav-menu li {
+        width: 100%;
+        text-align: center;
+        padding: 12px 20px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .nav-menu li:last-child {
+        border-bottom: none;
+      }
+
+      .nav-menu li a {
+        display: block;
+        font-size: 1.1rem;
+        padding: 10px;
+        color: #D4AF37;
+        border-bottom: none;
+        transition: background 0.2s, transform 0.1s;
+        font-weight: 600;
+      }
+
+      .nav-menu li a:hover {
+        background: #FFF8E7;
+        border-radius: 8px;
+        border-bottom: none;
+        color: #B8960F;
+      }
+
+      .nav-menu li a:active {
+        transform: scale(0.98);
+      }
+
+      /* A imagem continua 100px também no mobile - ajuste para caber na tela */
+      .img_menu {
+        width: 90px;
+        height: 90px;
+      }
+      
+      /* Ajuste do container para mobile */
+      .nav-container {
+        padding: 0 16px;
+      }
+    }
+
+    /* Garantia para telas grandes */
+    @media (min-width: 769px) {
+      .nav-wrapper {
+        display: block;
+      }
+      
+      .nav-menu {
+        display: flex;
+        position: static;
+        width: auto;
+        height: auto;
+        background: transparent;
+        flex-direction: row;
+        gap: 2rem;
+        padding: 0;
+        overflow-y: visible;
+        box-shadow: none;
+        border-top: none;
+      }
+      
+      .nav-menu.active {
+        left: auto;
+      }
+      
+      .hamburger-btn {
+        display: none !important;
+      }
+    }
+
+    /* ESTILOS DO CONTEÚDO PRINCIPAL */
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 24px;
+    }
+
+    section {
+      background: white;
+      border-radius: 24px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      scroll-margin-top: 80px;
+    }
+
+    section h2 {
+      color: #0f172a;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    section h3 {
+      color: #1e293b;
+      font-size: 1.3rem;
+      margin: 1rem 0 0.5rem;
+    }
+
+    section p {
+      color: #334155;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .card-grid {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 1.5rem;
+      flex: 1;
+      min-width: 200px;
+      border: 1px solid #e2e8f0;
+    }
+
+    hr {
+      margin: 2rem 0;
+      border: none;
+      border-top: 2px solid #e2e8f0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #eef2ff;
+      border-radius: 24px;
+      color: #1e293b;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        padding: 1.5rem;
+      }
+      section {
+        padding: 1.5rem;
+      }
+      section h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Classe para esconder scroll quando menu aberto */
+    body.menu-open {
+      overflow: hidden;
+    }
+  </style>
 </head>
 <body>
-    <h1>Olá esse será o incrivel portal da SB Laser</h1>
+
+<header class="top-header">
+  <div class="nav-container">
+    <a href="#" class="logo" aria-label="Página inicial">
+      <!-- IMAGEM DO MENU - 100px em todos dispositivos -->
+      <img src="Imagens/img_menu.png" 
+           alt="Logo do Menu" 
+           class="img_menu">
+    </a>
     
+    <!-- Botão hamburguer (aparece apenas mobile/tablet) -->
+    <button class="hamburger-btn" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navMenu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+
+    <!-- Wrapper do menu de navegação -->
+    <div class="nav-wrapper">
+      <nav aria-label="Navegação principal">
+        <ul class="nav-menu" id="navMenu" role="list">
+          <li role="listitem"><a href="#inicio" class="menu-link" data-section="inicio">Início</a></li>
+          <li role="listitem"><a href="#sobre" class="menu-link" data-section="sobre">Sobre</a></li>
+          <li role="listitem"><a href="#servicos" class="menu-link" data-section="servicos">Serviços</a></li>
+          <li role="listitem"><a href="#contato" class="menu-link" data-section="contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="main-content">
+  <section id="inicio">
+    <h2>🏠 Início</h2>
+    <p>Bem-vindo ao menu responsivo otimizado com imagem! Este componente foi desenvolvido com HTML5, CSS3 e JavaScript puro, sem dependências externas.</p>
+    <p>✧ Menu fixo no topo com imagem<br>
+    ✧ Em desktop (largura > 768px): menu horizontal sempre visível<br>
+    ✧ Em tablets e celulares (≤ 768px): menu hambúrguer com animação suave<br>
+    ✧ Itens do menu na cor dourada forte (#D4AF37)<br>
+    ✧ Botão hambúrguer agora no canto direito (corrigido!)</p>
+  </section>
+
+  
+
+
+
+<script>
+  (function() {
+    // ==================== ELEMENTOS ====================
+    const hamburger = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    const menuLinks = document.querySelectorAll('.menu-link');
+    const body = document.body;
+    
+    // Constantes
+    const HEADER_HEIGHT = 70;
+    const MOBILE_BREAKPOINT = 768;
+    
+    // Variáveis de controle
+    let resizeTimeout;
+    
+    // Verificação de segurança
+    if (!hamburger || !navMenu) {
+      console.warn('Elementos necessários não encontrados');
+      return;
+    }
+    
+    // ==================== FUNÇÕES AUXILIARES ====================
+    
+    // Verifica se está em modo mobile
+    function isMobile() {
+      return window.innerWidth <= MOBILE_BREAKPOINT;
+    }
+    
+    // Fechar menu (completo)
+    function closeMenu() {
+      if (!navMenu.classList.contains('active')) return;
+      
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      body.classList.remove('menu-open');
+    }
+    
+    // Abrir menu
+    function openMenu() {
+      if (navMenu.classList.contains('active')) return;
+      
+      navMenu.classList.add('active');
+      hamburger.classList.add('active');
+      hamburger.setAttribute('aria-expanded', 'true');
+      body.classList.add('menu-open');
+    }
+    
+    // Alterna o menu hamburguer
+    function toggleMenu() {
+      if (navMenu.classList.contains('active')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+    
+    // Scroll suave melhorado
+    function smoothScroll(targetElement) {
+      if (!targetElement) return;
+      
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - HEADER_HEIGHT;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+    
+    // ==================== EVENTOS ====================
+    
+    // Evento do botão hamburguer
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+    
+    // Ao clicar em qualquer link do menu
+    menuLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const targetId = link.getAttribute('href');
+        
+        if (targetId && targetId.startsWith('#')) {
+          e.preventDefault();
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            smoothScroll(targetElement);
+            
+            // Atualiza URL sem causar recarga
+            if (history.pushState) {
+              history.pushState(null, null, targetId);
+            }
+          }
+        }
+        
+        // Fecha o menu
+        if (isMobile()) {
+          closeMenu();
+        }
+      });
+    });
+    
+    // Fechar menu ao clicar fora (apenas mobile)
+    document.addEventListener('click', (event) => {
+      if (!isMobile()) return;
+      if (!navMenu.classList.contains('active')) return;
+      
+      const cliqueNoMenu = navMenu.contains(event.target);
+      const cliqueNoBotao = hamburger.contains(event.target);
+      
+      if (!cliqueNoMenu && !cliqueNoBotao) {
+        closeMenu();
+      }
+    });
+    
+    // Fechar menu com tecla ESC
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && navMenu.classList.contains('active')) {
+        closeMenu();
+        hamburger.focus();
+      }
+    });
+    
+    // Debounce no resize
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        if (!isMobile()) {
+          if (navMenu.classList.contains('active')) {
+            closeMenu();
+          }
+          body.classList.remove('menu-open');
+        }
+      }, 150);
+    });
+    
+    // Inicialização
+    function init() {
+      if (!isMobile()) {
+        if (navMenu.classList.contains('active')) {
+          navMenu.classList.remove('active');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+        body.classList.remove('menu-open');
+      }
+      
+      // Scroll para hash na URL
+      if (window.location.hash) {
+        const targetId = window.location.hash;
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          setTimeout(() => {
+            smoothScroll(targetElement);
+          }, 100);
+        }
+      }
+    }
+    
+    // Executa inicialização
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
 </body>
 </html>

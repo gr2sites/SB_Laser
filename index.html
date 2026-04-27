@@ -309,6 +309,174 @@
       border: 1px solid #e2e8f0;
     }
 
+    /* ========== ESTILOS DOS CARDS DE PRODUTOS ========== */
+    .produtos-section {
+      background: white;
+    }
+
+    .produtos-container {
+      margin-top: 1.5rem;
+    }
+
+    /* Estilos para desktop - cards fixos */
+    .produtos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .produto-card {
+      background: #f8fafc;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .produto-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .produto-imagem {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .produto-info {
+      padding: 1.5rem;
+    }
+
+    .produto-titulo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+
+    .produto-descricao {
+      color: #475569;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .produto-preco {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #D4AF37;
+      margin-bottom: 1rem;
+    }
+
+    .btn-comprar {
+      background: #D4AF37;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      width: 100%;
+    }
+
+    .btn-comprar:hover {
+      background: #B8960F;
+    }
+
+    /* Estilos para carrossel mobile */
+    .carrossel-container {
+      position: relative;
+      display: none;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .carrossel-wrapper {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .carrossel-track {
+      display: flex;
+      transition: transform 0.5s ease;
+      gap: 0;
+    }
+
+    .carrossel-slide {
+      flex: 0 0 100%;
+      padding: 0 10px;
+    }
+
+    .carrossel-slide .produto-card {
+      margin: 0 10px;
+    }
+
+    .carrossel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(212, 175, 55, 0.9);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .carrossel-btn:hover {
+      background: #B8960F;
+    }
+
+    .carrossel-prev {
+      left: 10px;
+    }
+
+    .carrossel-next {
+      right: 10px;
+    }
+
+    .carrossel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .dot.active {
+      background: #D4AF37;
+    }
+
+    /* Responsivo: até 768px ativa o carrossel */
+    @media (max-width: 768px) {
+      .produtos-grid {
+        display: none;
+      }
+      
+      .carrossel-container {
+        display: block;
+      }
+    }
+
     hr {
       margin: 2rem 0;
       border: none;
@@ -367,6 +535,7 @@
           <li role="listitem"><a href="#inicio" class="menu-link" data-section="inicio">Início</a></li>
           <li role="listitem"><a href="#sobre" class="menu-link" data-section="sobre">Sobre</a></li>
           <li role="listitem"><a href="#servicos" class="menu-link" data-section="servicos">Serviços</a></li>
+          <li role="listitem"><a href="#produtos" class="menu-link" data-section="produtos">Produtos</a></li>
           <li role="listitem"><a href="#contato" class="menu-link" data-section="contato">Contato</a></li>
         </ul>
       </nav>
@@ -376,9 +545,103 @@
 
 <main class="main-content">
   <section id="inicio">
-    <h2>Site em construção</h2>
-  
+    <h2>Bem-vindo ao nosso site!</h2>
+    <p>Conheça nossos produtos exclusivos com qualidade e preço justo.</p>
   </section>
+
+  <!-- Seção de Produtos -->
+  <section id="produtos" class="produtos-section">
+    <h2>Nossos Produtos</h2>
+    <p>Confira nossa seleção de produtos premium</p>
+    
+    <div class="produtos-container">
+      <!-- Grid para desktop (cards fixos) -->
+      <div class="produtos-grid">
+        <!-- Produto 01 -->
+        <div class="produto-card">
+          <img src="Imagens/produto-01.jpeg" alt="Produto 01" class="produto-imagem">
+          <div class="produto-info">
+            <h3 class="produto-titulo">Produto 01</h3>
+            <p class="produto-descricao">Descrição incrível do produto 01. Qualidade e durabilidade garantidas.</p>
+            <p class="produto-preco"></p>
+            
+          </div>
+        </div>
+
+        <!-- Produto 02 -->
+        <div class="produto-card">
+          <img src="Imagens/produto-02.jpeg" alt="Produto 02" class="produto-imagem">
+          <div class="produto-info">
+            <h3 class="produto-titulo">Produto 02</h3>
+            <p class="produto-descricao">Descrição incrível do produto 02. Design moderno e funcional.</p>
+            <p class="produto-preco"></p>
+            
+          </div>
+        </div>
+
+        <!-- Produto 03 -->
+        <div class="produto-card">
+          <img src="Imagens/produto-03.jpeg" alt="Produto 03" class="produto-imagem">
+          <div class="produto-info">
+            <h3 class="produto-titulo">Produto 03</h3>
+            <p class="produto-descricao">Descrição incrível do produto 03. Perfeito para o seu dia a dia.</p>
+            <p class="produto-preco"></p>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Carrossel para mobile e tablet -->
+      <div class="carrossel-container">
+        <button class="carrossel-btn carrossel-prev" aria-label="Anterior">❮</button>
+        <div class="carrossel-wrapper">
+          <div class="carrossel-track">
+            <div class="carrossel-slide">
+              <div class="produto-card">
+                <img src="Imagens/produto-01.jpeg" alt="Produto 01" class="produto-imagem">
+                <div class="produto-info">
+                  <h3 class="produto-titulo"></h3>
+                  <p class="produto-descricao">Descrição incrível do produto 01. Qualidade e durabilidade garantidas.</p>
+                  <p class="produto-preco"></p>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="carrossel-slide">
+              <div class="produto-card">
+                <img src="Imagens/produto-02.jpeg" alt="Produto 02" class="produto-imagem">
+                <div class="produto-info">
+                  <h3 class="produto-titulo">Produto 02</h3>
+                  <p class="produto-descricao">Descrição incrível do produto 02. Design moderno e funcional.</p>
+                  <p class="produto-preco"></p>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="carrossel-slide">
+              <div class="produto-card">
+                <img src="Imagens/produto-03.jpeg" alt="Produto 03" class="produto-imagem">
+                <div class="produto-info">
+                  <h3 class="produto-titulo">Produto 03</h3>
+                  <p class="produto-descricao">Descrição incrível do produto 03. Perfeito para o seu dia a dia.</p>
+                  <p class="produto-preco"></p>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carrossel-btn carrossel-next" aria-label="Próximo">❯</button>
+        <div class="carrossel-dots"></div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  
+
+  
 
 <script>
   (function() {
@@ -447,6 +710,86 @@
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
+      });
+    }
+    
+    // ==================== FUNÇÕES DO CARROSSEL ====================
+    function initCarrossel() {
+      const track = document.querySelector('.carrossel-track');
+      const slides = document.querySelectorAll('.carrossel-slide');
+      const prevBtn = document.querySelector('.carrossel-prev');
+      const nextBtn = document.querySelector('.carrossel-next');
+      const dotsContainer = document.querySelector('.carrossel-dots');
+      
+      if (!track || !slides.length) return;
+      
+      let currentIndex = 0;
+      let totalSlides = slides.length;
+      let dots = [];
+      
+      // Criar dots
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+        dots.push(dot);
+      }
+      
+      function updateDots() {
+        dots.forEach((dot, index) => {
+          if (index === currentIndex) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      }
+      
+      function goToSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= totalSlides) index = totalSlides - 1;
+        currentIndex = index;
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        updateDots();
+      }
+      
+      function nextSlide() {
+        if (currentIndex < totalSlides - 1) {
+          goToSlide(currentIndex + 1);
+        } else {
+          goToSlide(0);
+        }
+      }
+      
+      function prevSlide() {
+        if (currentIndex > 0) {
+          goToSlide(currentIndex - 1);
+        } else {
+          goToSlide(totalSlides - 1);
+        }
+      }
+      
+      if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+      if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+      
+      // Swipe touch para mobile
+      let touchStartX = 0;
+      let touchEndX = 0;
+      
+      track.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+      
+      track.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (touchEndX < touchStartX - 50) {
+          nextSlide();
+        }
+        if (touchEndX > touchStartX + 50) {
+          prevSlide();
+        }
       });
     }
     
@@ -528,6 +871,9 @@
         }
         body.classList.remove('menu-open');
       }
+      
+      // Inicializa o carrossel
+      initCarrossel();
       
       // Scroll para hash na URL
       if (window.location.hash) {

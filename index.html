@@ -279,18 +279,14 @@
       font-size: 1.8rem;
       margin-bottom: 1rem;
       font-weight: 700;
-    }
-
-    section h3 {
-      color: #1e293b;
-      font-size: 1.3rem;
-      margin: 1rem 0 0.5rem;
+      text-align: center;
     }
 
     section p {
       color: #334155;
       line-height: 1.6;
       margin-bottom: 1rem;
+      text-align: center;
     }
 
     .card-grid {
@@ -307,6 +303,18 @@
       flex: 1;
       min-width: 200px;
       border: 1px solid #e2e8f0;
+      text-align: center;
+    }
+
+    .card h3 {
+      color: #1e293b;
+      font-size: 1.3rem;
+      margin: 0 0 0.5rem;
+      text-align: center;
+    }
+
+    .card p {
+      text-align: center;
     }
 
     /* ========== ESTILOS DOS CARDS DE PRODUTOS ========== */
@@ -348,6 +356,7 @@
 
     .produto-info {
       padding: 1.5rem;
+      text-align: center;
     }
 
     .produto-titulo {
@@ -355,6 +364,7 @@
       font-weight: 700;
       color: #0f172a;
       margin-bottom: 0.5rem;
+      text-align: center;
     }
 
     .produto-descricao {
@@ -362,6 +372,7 @@
       font-size: 0.9rem;
       line-height: 1.5;
       margin-bottom: 1rem;
+      text-align: center;
     }
 
     .produto-preco {
@@ -369,6 +380,7 @@
       font-weight: 700;
       color: #D4AF37;
       margin-bottom: 1rem;
+      text-align: center;
     }
 
     .btn-comprar {
@@ -466,7 +478,7 @@
       background: #D4AF37;
     }
 
-    /* Responsivo: até 768px ativa o carrossel */
+    /* Responsivo: até 768px ativa o carrossel e aumenta imagens */
     @media (max-width: 768px) {
       .produtos-grid {
         display: none;
@@ -474,6 +486,36 @@
       
       .carrossel-container {
         display: block;
+      }
+
+      /* Aumenta o tamanho das imagens no carrossel */
+      .carrossel-slide .produto-imagem {
+        height: 350px;
+      }
+
+      /* Aumenta fonte dos textos no mobile */
+      .produto-titulo {
+        font-size: 1.4rem;
+      }
+
+      .produto-descricao {
+        font-size: 1rem;
+      }
+
+      .produto-preco {
+        font-size: 1.6rem;
+      }
+
+      .btn-comprar {
+        font-size: 1rem;
+        padding: 12px 20px;
+      }
+    }
+
+    /* Ajuste para tablets menores */
+    @media (max-width: 480px) {
+      .carrossel-slide .produto-imagem {
+        height: 300px;
       }
     }
 
@@ -533,10 +575,7 @@
       <nav aria-label="Navegação principal">
         <ul class="nav-menu" id="navMenu" role="list">
           <li role="listitem"><a href="#inicio" class="menu-link" data-section="inicio">Início</a></li>
-          <li role="listitem"><a href="#sobre" class="menu-link" data-section="sobre">Sobre</a></li>
-          <li role="listitem"><a href="#servicos" class="menu-link" data-section="servicos">Serviços</a></li>
           <li role="listitem"><a href="#produtos" class="menu-link" data-section="produtos">Produtos</a></li>
-          <li role="listitem"><a href="#contato" class="menu-link" data-section="contato">Contato</a></li>
         </ul>
       </nav>
     </div>
@@ -563,8 +602,8 @@
           <div class="produto-info">
             <h3 class="produto-titulo">Produto 01</h3>
             <p class="produto-descricao">Descrição incrível do produto 01. Qualidade e durabilidade garantidas.</p>
-            <p class="produto-preco"></p>
-            
+            <p class="produto-preco">R$ 99,90</p>
+            <button class="btn-comprar" onclick="alert('Produto 01 adicionado ao carrinho!')">Comprar</button>
           </div>
         </div>
 
@@ -574,8 +613,8 @@
           <div class="produto-info">
             <h3 class="produto-titulo">Produto 02</h3>
             <p class="produto-descricao">Descrição incrível do produto 02. Design moderno e funcional.</p>
-            <p class="produto-preco"></p>
-            
+            <p class="produto-preco">R$ 149,90</p>
+            <button class="btn-comprar" onclick="alert('Produto 02 adicionado ao carrinho!')">Comprar</button>
           </div>
         </div>
 
@@ -585,8 +624,8 @@
           <div class="produto-info">
             <h3 class="produto-titulo">Produto 03</h3>
             <p class="produto-descricao">Descrição incrível do produto 03. Perfeito para o seu dia a dia.</p>
-            <p class="produto-preco"></p>
-            
+            <p class="produto-preco">R$ 199,90</p>
+            <button class="btn-comprar" onclick="alert('Produto 03 adicionado ao carrinho!')">Comprar</button>
           </div>
         </div>
       </div>
@@ -600,10 +639,10 @@
               <div class="produto-card">
                 <img src="Imagens/produto-01.jpeg" alt="Produto 01" class="produto-imagem">
                 <div class="produto-info">
-                  <h3 class="produto-titulo"></h3>
-                  <p class="produto-descricao">Descrição do produto</p>
-                  <p class="produto-preco"></p>
-                  
+                  <h3 class="produto-titulo">Produto 01</h3>
+                  <p class="produto-descricao">Descrição incrível do produto 01. Qualidade e durabilidade garantidas.</p>
+                  <p class="produto-preco">R$ 99,90</p>
+                  <button class="btn-comprar" onclick="alert('Produto 01 adicionado ao carrinho!')">Comprar</button>
                 </div>
               </div>
             </div>
@@ -611,10 +650,10 @@
               <div class="produto-card">
                 <img src="Imagens/produto-02.jpeg" alt="Produto 02" class="produto-imagem">
                 <div class="produto-info">
-                  <h3 class="produto-titulo"></h3>
-                  <p class="produto-descricao">Descrição do produto</p>
-                  <p class="produto-preco"></p>
-                  
+                  <h3 class="produto-titulo">Produto 02</h3>
+                  <p class="produto-descricao">Descrição incrível do produto 02. Design moderno e funcional.</p>
+                  <p class="produto-preco">R$ 149,90</p>
+                  <button class="btn-comprar" onclick="alert('Produto 02 adicionado ao carrinho!')">Comprar</button>
                 </div>
               </div>
             </div>
@@ -622,10 +661,10 @@
               <div class="produto-card">
                 <img src="Imagens/produto-03.jpeg" alt="Produto 03" class="produto-imagem">
                 <div class="produto-info">
-                  <h3 class="produto-titulo"></h3>
-                  <p class="produto-descricao">Descrição do produto</p>
-                  <p class="produto-preco"></p>
-                  
+                  <h3 class="produto-titulo">Produto 03</h3>
+                  <p class="produto-descricao">Descrição incrível do produto 03. Perfeito para o seu dia a dia.</p>
+                  <p class="produto-preco">R$ 199,90</p>
+                  <button class="btn-comprar" onclick="alert('Produto 03 adicionado ao carrinho!')">Comprar</button>
                 </div>
               </div>
             </div>
@@ -636,12 +675,7 @@
       </div>
     </div>
   </section>
-
-  
-
-  
-
-  
+</main>
 
 <script>
   (function() {
@@ -727,14 +761,19 @@
       let totalSlides = slides.length;
       let dots = [];
       
-      // Criar dots
-      for (let i = 0; i < totalSlides; i++) {
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(i));
-        dotsContainer.appendChild(dot);
-        dots.push(dot);
+      // Limpar dots existentes
+      if (dotsContainer) {
+        dotsContainer.innerHTML = '';
+        
+        // Criar dots
+        for (let i = 0; i < totalSlides; i++) {
+          const dot = document.createElement('div');
+          dot.classList.add('dot');
+          if (i === 0) dot.classList.add('active');
+          dot.addEventListener('click', () => goToSlide(i));
+          dotsContainer.appendChild(dot);
+          dots.push(dot);
+        }
       }
       
       function updateDots() {
